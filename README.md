@@ -4,7 +4,7 @@ An AI-assisted emergency triage system: patients (or intake staff) enter symptom
 
 [![CI](https://github.com/Shubham-cde/orion-health/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/Shubham-cde/orion-health/actions/workflows/ci-cd.yaml)
 
- The idea came from how emergency departments actually run and how managing more number of patients can be difficult at a time: the order people are seen in matters more than the order they arrive in, and that call gets made under time pressure. This is a demo of what software support for that decision could look like.
+I built this for HackMatrix 2026. The idea came from how emergency departments actually run: the order people are seen in matters more than the order they arrive in, and that call gets made under time pressure. This is a demo of what software support for that decision could look like.
 
 **This is not a medical device.** The model is trained on synthetic data and shouldn't be used for real clinical decisions.
 
@@ -66,7 +66,12 @@ npm run dev
 
 Then open http://localhost:3000.
 
-**Email alerts (optional):** copy `.env.example` to `.env` in the project root and add `EMAIL_SENDER` (a Gmail address) and `EMAIL_PASSWORD` (a [Gmail App Password](https://myaccount.google.com/apppasswords), which needs 2-Step Verification turned on). Without these the app runs fine and just skips sending. You can also set `SMTP_SERVER` and `SMTP_PORT` for a non-Gmail provider, and `DB_DIR` to move the SQLite files somewhere else.
+**Email alerts (optional):** copy `.env.example` to `.env` in the project root and set `EMAIL_SENDER` to the address alerts come from. Then pick one of two ways to send:
+
+- `BREVO_API_KEY` sends over the [Brevo](https://www.brevo.com/) HTTPS API. This is what the deployed version uses, because most free hosting blocks the SMTP ports.
+- `EMAIL_PASSWORD` sends over Gmail SMTP using an [App Password](https://myaccount.google.com/apppasswords), which needs 2-Step Verification. Handy locally.
+
+If the Brevo key is set it wins; otherwise SMTP is used; if neither is set the app runs fine and just skips sending. `SMTP_SERVER` and `SMTP_PORT` override the Gmail defaults, and `DB_DIR` moves the SQLite files elsewhere.
 
 **AI explanations (optional):** install Ollama and run `ollama pull llama3`. When it's running, explanations come from Llama 3.
 
