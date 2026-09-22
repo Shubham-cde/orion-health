@@ -1,0 +1,49 @@
+# ====== Render Infrastructure Blueprint (render.yaml) ======
+# Deploys both FastAPI Backend and Next.js Frontend from a single repository
+
+services:
+  # ----------------------------------------------------
+  # 1. FastAPI Python Backend Service
+  # ----------------------------------------------------
+  - type: web
+    name: orion-backend
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.10.11"
+      - key: OLLAMA_HOST
+        value: "http://localhost:11434"
+      - key: DB_DIR
+        value: "/data"
+      - key: EMAIL_SENDER
+        sync: false   # set in Render dashboard
+      - key: EMAIL_PASSWORD
+        sync: false   # set in Render dashboard
+    disk:
+      name: orion-db
+      mountPath: /data
+      sizeGB: 1
+    healthCheckPath: /
+
+  # ----------------------------------------------------
+  # 2. Next.js Frontend Service
+  # ----------------------------------------------------
+  - type: web
+    name: orion-frontend
+    env: node
+    rootDir: orion-frontend
+    region: singapore
+    plan: free
+    buildCommand: "npm install --legacy-peer-deps && npm run build"
+    startCommand: "npm run start"
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://YOUR-BACKEND-NAME.onrender.com/api   # replace after deploying the backend
+      - key: NEXT_PUBLIC_WS_URL
+        value: wss://YOUR-BACKEND-NAME.onrender.com/ws   # replace after deploying the backend
+      - key: NODE_VERSION
+        value: "20"

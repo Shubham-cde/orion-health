@@ -1,0 +1,17 @@
+venv/
+env/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.db
+.vscode/
+.idea/
+logs/*.log
+.pytest_cache/
+node_modules/
+.next/
+*.pid
+!.env.example
+app/ai/*.pkl

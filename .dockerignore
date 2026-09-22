@@ -1,0 +1,11 @@
+orion-frontend/
+venv/
+.venv/
+.git/
+.github/
+docs/
+tests/
+**/__pycache__/
+*.db
+.env
+app/ai/*.pkl

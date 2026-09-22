@@ -1,0 +1,28 @@
+# ---------- Core Backend ----------
+fastapi
+uvicorn[standard]
+starlette
+python-multipart
+
+# ---------- Validation & Config ----------
+pydantic
+python-dotenv
+
+# ---------- Database ----------
+sqlalchemy
+
+# ---------- Machine Learning ----------
+numpy
+pandas
+scikit-learn
+joblib
+
+# ---------- Ollama Integration ----------
+requests
+httpx
+
+# ---------- WebSocket / Realtime ----------
+websockets
+
+# ---------- Logging ----------
+loguru
