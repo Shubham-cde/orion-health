@@ -4,6 +4,8 @@ An AI-assisted emergency triage system: patients (or intake staff) enter symptom
 
 [![CI](https://github.com/Shubham-cde/orion-health/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/Shubham-cde/orion-health/actions/workflows/ci-cd.yaml)
 
+   **[Live demo](https://orion-health-tan.vercel.app/)** — the backend sleeps when idle, so the first request takes about a minute to wake up.
+
 I built this for HackMatrix 2026. The idea came from how emergency departments actually run: the order people are seen in matters more than the order they arrive in, and that call gets made under time pressure. This is a demo of what software support for that decision could look like.
 
 **This is not a medical device.** The model is trained on synthetic data and shouldn't be used for real clinical decisions.
