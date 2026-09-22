@@ -118,7 +118,9 @@ GitHub Actions runs on every push: linting, model training, and the backend test
 
 ## Deployment
 
-`render.yaml` deploys both services to Render. Once the backend is live, point `NEXT_PUBLIC_API_BASE_URL` and `NEXT_PUBLIC_WS_URL` at its URL and add the email variables in the Render dashboard.
+The backend runs on Render using the included `render.yaml`, with `EMAIL_SENDER` and `BREVO_API_KEY` set in the Render dashboard. The frontend runs on Vercel with its root directory set to `orion-frontend` and `NEXT_PUBLIC_API_BASE_URL` / `NEXT_PUBLIC_WS_URL` pointing at the backend URL.
+
+On Render's free plan the backend sleeps after 15 minutes of inactivity, so the first request can take about a minute to wake it up, and the SQLite data resets on restart.
 
 ## What I'd do next
 
